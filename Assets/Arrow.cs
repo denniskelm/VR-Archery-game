@@ -22,7 +22,7 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
 
             // Optional: Set the object's position to the contact point for precise sticking
             ContactPoint contact = collision.contacts[0];

@@ -448,10 +448,6 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7578506563315809414, guid: 1f1099340aa491b4bba648db3425c6e4, type: 3}
-      propertyPath: dot
-      value: 
-      objectReference: {fileID: 741932612444277133, guid: 8fb3f9bbc59eb0144b964390b777bb0f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
