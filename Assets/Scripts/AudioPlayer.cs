@@ -16,17 +16,14 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayBowLoading()
     {
-        GetComponent<AudioSource>().clip = BowLoading;
-        GetComponent<AudioSource>().Play();
+        GetComponent<AudioSource>().PlayOneShot(BowLoading);
     }
     public void PlayBowRelease()
     {
-        GetComponent<AudioSource>().clip = BowRelease;
-        GetComponent<AudioSource>().Play();
+        GetComponent<AudioSource>().PlayOneShot(BowRelease);
     }
     public void PlayTargetHit()
     {
-        GetComponent<AudioSource>().clip = TargetHit;
-        GetComponent<AudioSource>().Play();
+        GetComponent<AudioSource>().PlayOneShot(TargetHit);
     }
 }
