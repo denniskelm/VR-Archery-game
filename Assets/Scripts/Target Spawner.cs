@@ -46,7 +46,7 @@ public class TargetSpawner : MonoBehaviour
         score = 0;
         spawmTimer = SpawnDelay;
 
-        StartCoroutine(FadeCeilingLight(new(0.8f,1,0.8f), 1));
+        StartCoroutine(FadeCeilingLight(-30, 1));
     }
 
     public void Start()
@@ -122,11 +122,11 @@ public class TargetSpawner : MonoBehaviour
 
     IEnumerator FadeCeilingLight(float xDeg, float duration) 
     {
-        Vector4 initRot = CeilingLight.color;
-        //Vector3 goalRot = 
+        Vector3 initRot = CeilingLight.transform.rotation.eulerAngles;
+        Vector3 goalRot = new(initRot.x + xDeg, initRot.y, initRot.z);
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
-            //CeilingLight.transform.forward =  Vector3.Lerp(initColor, goalColor, time / duration);
+            CeilingLight.transform.eulerAngles =  Vector3.Lerp(initRot, goalRot, time / duration);
             yield return null;
         }
     }
