@@ -1503,7 +1503,7 @@
                     "name": "Select",
                     "type": "Button",
                     "id": "ac96c10b-c955-4a46-8e67-bf16bc069b53",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -2761,6 +2761,34 @@
                     "action": "Spawn Object",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Own",
+            "id": "c91a4e2f-50d4-43a0-a4ba-4e2cb8e1a71c",
+            "actions": [
+                {
+                    "name": "ChangeHandedness",
+                    "type": "Button",
+                    "id": "d038c4cf-c718-4e9f-85d6-cdc283dc78c6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d12a34e6-da97-467c-b4e1-927dbb310d26",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeHandedness",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

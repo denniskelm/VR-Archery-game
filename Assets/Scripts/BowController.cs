@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
@@ -19,6 +20,8 @@ public class BowController : MonoBehaviour
     [SerializeField] Handedness handedness;
     [SerializeField] bool ShowInteractor;
 
+    public InputActionReference inputActionReference;
+
     [Header("Arrow Launch Settings")]
     [Range(0.0f, 5.0f)] public float ForceMultiplier = 1;
 
@@ -34,13 +37,20 @@ public class BowController : MonoBehaviour
         BowInteractable = Bow.GetComponentInChildren<XRSimpleInteractable>();
         BowInteractable.selectEntered.AddListener(_ => { AudioPlayer.Instance.PlayBowLoading(); });
         BowInteractable.selectExited.AddListener(_ => { LaunchArrow(drawDistance); });
+
+        inputActionReference.action.started += ChangeHandedness;
+    }
+
+    private void ChangeHandedness(InputAction.CallbackContext context)
+    {
+        handedness = handedness == Handedness.Left ? Handedness.Right : Handedness.Left;
     }
 
     void Update()
     {
         Bow.transform.localPosition = Vector3.zero;
         Bow.transform.localRotation = Quaternion.identity;
-
+        
         Bow.transform.parent = (handedness == Handedness.Right) ?
             LeftController :
             RightController;

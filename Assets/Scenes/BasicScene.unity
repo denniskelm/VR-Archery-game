@@ -8486,8 +8486,9 @@ MonoBehaviour:
   LeftController: {fileID: 903062367}
   BowPrefab: {fileID: 3588909183151357537, guid: 487543c6ba21d0f478084a9912a6c7bd, type: 3}
   ArrowPrefab: {fileID: 3248195920945627056, guid: 1f1099340aa491b4bba648db3425c6e4, type: 3}
-  handedness: 1
+  handedness: 0
   ShowInteractor: 1
+  inputActionReference: {fileID: -3222715885129325957, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   ForceMultiplier: 1.54
 --- !u!4 &1151215717
 Transform:
@@ -10831,7 +10832,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1897108578803551515, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
       propertyPath: m_text
-      value: VR Archery Game
+      value: 'VR Archery Game
+
+        Press A to switch hands'
       objectReference: {fileID: 0}
     - target: {fileID: 3060619106468608791, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
       propertyPath: m_PresetInfoIsWorld
