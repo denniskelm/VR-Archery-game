@@ -5,19 +5,13 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     public GameObject dot;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    void FixedUpdate()
     {
-        
+        if (GetComponent<Rigidbody>().velocity != Vector3.zero)
+            GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall"))

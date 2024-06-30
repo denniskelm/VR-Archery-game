@@ -4,31 +4,23 @@ using UnityEngine;
 
 public class ArrowLauncher : MonoBehaviour
 {
+    public ArrowLauncher Instance { get; private set; }
 
     public GameObject ArrowPrefab;
-
-    private GameObject instance;
     
-    void Start()
+    void Awake()
     {
-        InvokeRepeating("launchArrow", 1.0f, 0.3f);
+        Instance = this;
+        InvokeRepeating("LaunchArrow", 1.0f, 0.3f);
     }
 
-    void FixedUpdate(){
-        if(instance != null && instance.GetComponent<Rigidbody>().velocity != Vector3.zero)
-            instance.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(instance.GetComponent<Rigidbody>().velocity);  
-    }
-
-    public void launchArrow()
+    public void LaunchArrow()
     {
-        GameObject arrow = ArrowPrefab;
+        GameObject arrow = Instantiate(ArrowPrefab);
         arrow.transform.position = new Vector3(1, 2, 3);
-        
+        arrow.transform.forward =
+            Vector3.Slerp(arrow.transform.forward, arrow.GetComponent<Rigidbody>().velocity.normalized, Time.deltaTime);
 
-        instance = Instantiate(arrow);
-        instance.transform.forward =
-            Vector3.Slerp(instance.transform.forward, instance.GetComponent<Rigidbody>().velocity.normalized, Time.deltaTime);
-
-        instance.GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(-2f, 2f), 1f, Random.Range(2f, 5f));
+        arrow.GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(-2f, 2f), 1f, Random.Range(2f, 5f));
     }
 }
