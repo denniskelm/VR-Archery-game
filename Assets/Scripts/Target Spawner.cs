@@ -116,6 +116,8 @@ public class TargetSpawner : MonoBehaviour
     public void DestroyTarget(GameObject target)
     {
         score++;
+        
+        AudioPlayer.Instance.PlayTargetHit();
 
         targets.Remove(target);
         Destroy(target);
