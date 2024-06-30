@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
@@ -7,9 +5,8 @@ public class AudioPlayer : MonoBehaviour
     public static AudioPlayer Instance { get; private set; }
 
     [Header("Recorder Sounds")]
-    [SerializeField] AudioClip RecordingStart;
-    [SerializeField] AudioClip RecordingEnd;
-    [SerializeField] AudioClip RecordingFail; // played when a recording fails (e.g. due to the amount of features changing)
+    [SerializeField] AudioClip BowLoading;
+    [SerializeField] AudioClip BowRelease;
 
     [Header("Game Sounds")]
     [SerializeField] AudioClip BubblePop;
@@ -19,19 +16,14 @@ public class AudioPlayer : MonoBehaviour
         Instance = this;
     }
 
-    public void PlayRecordingStart()
+    public void PlayBowLoading()
     {
-        GetComponent<AudioSource>().clip = RecordingStart;
+        GetComponent<AudioSource>().clip = BowLoading;
         GetComponent<AudioSource>().Play();
     }
-    public void PlayRecordingEnd()
+    public void PlayBowRelease()
     {
-        GetComponent<AudioSource>().clip = RecordingEnd;
-        GetComponent<AudioSource>().Play();
-    }
-    public void PlayRecordingFail()
-    {
-        GetComponent<AudioSource>().clip = RecordingFail;
+        GetComponent<AudioSource>().clip = BowRelease;
         GetComponent<AudioSource>().Play();
     }
 }
