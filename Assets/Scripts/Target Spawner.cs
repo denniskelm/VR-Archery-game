@@ -100,7 +100,7 @@ public class TargetSpawner : MonoBehaviour
         score++;
 
         targets.Remove(target);
-        Destroy(target, 1f);
+        Destroy(target);
     }
 
     Vector3 RandomSpawnPos()
