@@ -49,6 +49,12 @@ public class TargetSpawner : MonoBehaviour
         StartCoroutine(FadeCeilingLight(new(0.8f,1,0.8f), 1));
     }
 
+    public void Start()
+    {
+        RunStart();
+    }
+        
+        
     private void FixedUpdate()
     {
         //Todo: remove
