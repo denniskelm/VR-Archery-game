@@ -32,7 +32,8 @@ public class BowController : MonoBehaviour
 
         Bow = Instantiate(BowPrefab);
         BowInteractable = Bow.GetComponentInChildren<XRSimpleInteractable>();
-        BowInteractable.selectExited.AddListener((SelectExitEventArgs) => { LaunchArrow(drawDistance); });
+        BowInteractable.selectEntered.AddListener(_ => { AudioPlayer.Instance.PlayBowLoading(); });
+        BowInteractable.selectExited.AddListener(_ => { LaunchArrow(drawDistance); });
     }
 
     void Update()
@@ -62,5 +63,7 @@ public class BowController : MonoBehaviour
         arrow.transform.forward = Bow.transform.forward;
 
         arrow.GetComponent<Rigidbody>().velocity = ForceMultiplier * 20 * (force + 0.2f) * arrow.transform.forward;
+        
+        AudioPlayer.Instance.PlayBowRelease();
     }
 }

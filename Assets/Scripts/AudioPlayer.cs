@@ -7,9 +7,7 @@ public class AudioPlayer : MonoBehaviour
     [Header("Recorder Sounds")]
     [SerializeField] AudioClip BowLoading;
     [SerializeField] AudioClip BowRelease;
-
-    [Header("Game Sounds")]
-    [SerializeField] AudioClip BubblePop;
+    [SerializeField] AudioClip TargetHit;
 
     private void Awake()
     {
@@ -24,6 +22,11 @@ public class AudioPlayer : MonoBehaviour
     public void PlayBowRelease()
     {
         GetComponent<AudioSource>().clip = BowRelease;
+        GetComponent<AudioSource>().Play();
+    }
+    public void PlayTargetHit()
+    {
+        GetComponent<AudioSource>().clip = TargetHit;
         GetComponent<AudioSource>().Play();
     }
 }
