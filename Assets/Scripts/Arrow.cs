@@ -22,5 +22,11 @@ public class Arrow : MonoBehaviour
             ContactPoint contact = collision.contacts[0];
             Instantiate(dot, contact.point, dot.transform.rotation);
         }
+
+        if (collision.gameObject.CompareTag("Target"))
+        {
+            TargetSpawner.Instance.DestroyTarget(collision.gameObject);
+            Destroy(gameObject);
+        }
     }
 }

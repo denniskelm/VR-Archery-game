@@ -12,8 +12,6 @@ public class TargetSpawner : MonoBehaviour
     [SerializeField] GameObject TargetPrefab;
     [SerializeField] Color[] TargetColors;
     [SerializeField] Transform SpawnOrigin;
-    [Space(10)]
-    [SerializeField] bool DoRecordCSV; // will tell the recorder to record if it exists
 
     [Header("Settings")]
     [SerializeField] float MinTargetScale;
@@ -91,7 +89,7 @@ public class TargetSpawner : MonoBehaviour
         targets.Add(target);
 
         target.transform.position = RandomSpawnPos();
-        target.transform.localScale = Random.Range(MinTargetScale, MaxTargetScale) * target.transform.localScale;
+        target.transform.localScale = 0.1f * Random.Range(MinTargetScale, MaxTargetScale) * target.transform.localScale;
         //target.transform.LookAt(GameObject.Find("Main Camera").transform);
 
         target.GetComponent<MeshRenderer>().material.color = TargetColors[Random.Range(0, TargetColors.Length)];
