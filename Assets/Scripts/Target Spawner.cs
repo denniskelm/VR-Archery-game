@@ -77,7 +77,7 @@ public class TargetSpawner : MonoBehaviour
     {
         isRunning = false;
 
-        StartCoroutine(FadeCeilingLight(new(1, 0.5f, 0.5f), 1));
+        StartCoroutine(FadeCeilingLight(30, 1));
 
         foreach (var target in targets) Destroy(target);
         targets.Clear();
@@ -85,11 +85,11 @@ public class TargetSpawner : MonoBehaviour
 
     void SpawnTarget()
     {
-        GameObject target = Instantiate(TargetPrefab, transform);
+        GameObject target = Instantiate(TargetPrefab);
         targets.Add(target);
 
         target.transform.position = RandomSpawnPos();
-        target.transform.localScale = 0.1f * Random.Range(MinTargetScale, MaxTargetScale) * target.transform.localScale;
+        target.transform.localScale = Random.Range(MinTargetScale, MaxTargetScale) * target.transform.localScale;
         //target.transform.LookAt(GameObject.Find("Main Camera").transform);
 
         target.GetComponent<MeshRenderer>().material.color = TargetColors[Random.Range(0, TargetColors.Length)];
@@ -114,12 +114,13 @@ public class TargetSpawner : MonoBehaviour
             );
     }
 
-    IEnumerator FadeCeilingLight(Vector4 goalColor, float duration) 
+    IEnumerator FadeCeilingLight(float xDeg, float duration) 
     {
-        Vector4 initColor = CeilingLight.color;
+        Vector4 initRot = CeilingLight.color;
+        //Vector3 goalRot = 
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
-            CeilingLight.color =  Vector4.Lerp(initColor, goalColor, time / duration);
+            //CeilingLight.transform.forward =  Vector3.Lerp(initColor, goalColor, time / duration);
             yield return null;
         }
     }

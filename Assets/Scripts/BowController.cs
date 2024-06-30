@@ -49,6 +49,7 @@ public class BowController : MonoBehaviour
             InteractionLayerMask.GetMask("Only Left");
 
         drawDistance = BowInteractable.isSelected ? Vector3.Distance(Bow.transform.position, BowInteractable.interactorsSelecting[0].transform.position) : 0;
+        drawDistance = Mathf.Clamp(drawDistance, 0, 1);
 
         BowInteractable.GetComponent<MeshRenderer>().material.color = ShowInteractor ? (1 - drawDistance) * Vector4.one : Vector4.zero;
     }
@@ -60,6 +61,6 @@ public class BowController : MonoBehaviour
         arrow.transform.position = Bow.transform.position;
         arrow.transform.forward = Bow.transform.forward;
 
-        arrow.GetComponent<Rigidbody>().velocity = ForceMultiplier * 20 * force * arrow.transform.forward;
+        arrow.GetComponent<Rigidbody>().velocity = ForceMultiplier * 20 * (force + 0.2f) * arrow.transform.forward;
     }
 }
