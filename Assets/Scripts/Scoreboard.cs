@@ -8,8 +8,10 @@ public class Scoreboard : MonoBehaviour
 
     public static Scoreboard Instance { get; private set; }
 
-    [SerializeField] TMP_Text ScoreboardText;
-
+    public TMP_Text TargetsHitText;
+    public TMP_Text TimeLeftText;
+    public GameObject GamePausedText;
+    
     private void Awake()
     {
         Instance = this;
@@ -20,14 +22,12 @@ public class Scoreboard : MonoBehaviour
         switch (TargetSpawner.Instance.isRunning)
         {
             case false:
-                ScoreboardText.text =
-                    $"Game Paused.\n" +
-                    $"Pinch with left hand to start.";
+                GamePausedText.SetActive(true);
                 break;
             case true:
-                ScoreboardText.text =
-                    $"Bubbles popped: {TargetSpawner.Instance.score:00}\n" + 
-                    $"Time left: {TargetSpawner.Instance.timer:00.0}";
+                GamePausedText.SetActive(false);
+                TargetsHitText.text = $"{TargetSpawner.Instance.score:00}";
+                TimeLeftText.text = $"{TargetSpawner.Instance.timer:00.0}";
                 break;
         }
     }
