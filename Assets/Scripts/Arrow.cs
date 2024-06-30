@@ -28,5 +28,15 @@ public class Arrow : MonoBehaviour
             TargetSpawner.Instance.DestroyTarget(collision.gameObject);
             Destroy(gameObject);
         }
+
+        if (collision.gameObject.CompareTag("Starttarget"))
+        {
+            if (collision.gameObject.name == "Easy") TargetSpawner.Instance.RunStart(TargetSpawner.Difficulty.easy);
+            if (collision.gameObject.name == "Medium") TargetSpawner.Instance.RunStart(TargetSpawner.Difficulty.medium);
+            if (collision.gameObject.name == "Hard") TargetSpawner.Instance.RunStart(TargetSpawner.Difficulty.hard);
+
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
     }
 }

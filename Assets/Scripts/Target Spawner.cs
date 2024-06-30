@@ -8,8 +8,11 @@ public class TargetSpawner : MonoBehaviour
 {
     public static TargetSpawner Instance { get; private set; }
 
+    public enum Difficulty { easy, medium, hard };
+
     [SerializeField] Light CeilingLight;
     [SerializeField] GameObject TargetPrefab;
+    [SerializeField] GameObject StarttargetsPrefab;
     [SerializeField] Color[] TargetColors;
     [SerializeField] Transform SpawnOrigin;
 
@@ -17,30 +20,46 @@ public class TargetSpawner : MonoBehaviour
     [SerializeField] float MinTargetScale;
     [SerializeField] float MaxTargetScale;
     [SerializeField] [Range(0.1f, 2.0f)] float SpawnDelay = 1;
-    [SerializeField] float RunDuration = 10;
+    [SerializeField] float RunDuration;
 
     List<GameObject> targets = new();
+    GameObject Starttargets;
     float spawmTimer; // seconds before the next target spawns
     public float timer { get; private set; } // seconds left the state progresses
     public int score { get; private set; }
     public int runCounter { get; private set; } //counts how many runs were made this session
     public bool isRunning { get; private set; }
 
+
     private void Awake()
     {
         Instance = this;
         isRunning = false;
         runCounter = 0;
+
+        Starttargets = Instantiate(StarttargetsPrefab);
     }
 
-    public void GamePauseOrUnpause()
+    public void RunStart(Difficulty difficulty)
     {
-        if (isRunning) RunEnd();
-        else RunStart();
-    }
+        switch (difficulty)
+        {
+            case Difficulty.easy:
+                MinTargetScale = 1.5f;
+                MaxTargetScale = 2f;
+                break;
+            case Difficulty.medium:
+                MinTargetScale = 0.8f;
+                MaxTargetScale = 1.3f;
+                break;
+            case Difficulty.hard:
+                MinTargetScale = 0.3f;
+                MaxTargetScale = 0.8f;
+                break;
+        }
 
-    public void RunStart()
-    {
+        Destroy(Starttargets);
+
         isRunning = true;
         timer = RunDuration;
         score = 0;
@@ -48,18 +67,9 @@ public class TargetSpawner : MonoBehaviour
 
         StartCoroutine(FadeCeilingLight(-30, 1));
     }
-
-    public void Start()
-    {
-        RunStart();
-    }
-        
         
     private void FixedUpdate()
     {
-        //Todo: remove
-        if (Keyboard.current.spaceKey.wasPressedThisFrame) RunStart();
-
         if (isRunning)
         {
             spawmTimer -= Time.deltaTime;
@@ -87,6 +97,8 @@ public class TargetSpawner : MonoBehaviour
 
         foreach (var target in targets) Destroy(target);
         targets.Clear();
+
+        Starttargets = Instantiate(StarttargetsPrefab);
     }
 
     void SpawnTarget()
